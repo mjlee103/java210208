@@ -14,14 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import common.jdbc.MemberDao;
+
 public class LoginForm extends JFrame implements ActionListener {
 	
 	String imgPath = "src\\com\\design\\zipcode\\";
 	ImageIcon ig 		= new ImageIcon(imgPath+"main.png");
 	JLabel jlb_id 		= new JLabel("아이디");
-	JTextField jtf_id 	= new JTextField("test");
+	JTextField jtf_id 	= new JTextField("");
 	JLabel jlb_pw 		= new JLabel("비밀번호");
-	JPasswordField jtf_pw 	= new JPasswordField("123");
+	JPasswordField jtf_pw 	= new JPasswordField("");
 	Font font = new Font("휴먼매직체",Font.BOLD, 17);
 	JButton jbtn_login =
 			new JButton(
@@ -73,6 +75,31 @@ public class LoginForm extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(jbtn_login==obj) {
+			MemberDao md = new MemberDao();
+			if("".equals(jtf_id.getText())||"".contentEquals(jtf_pw.getText())) {
+				JOptionPane.showMessageDialog(this, "아이디와 비번을 확인하세요");
+				return;//actionperformed 탈출하기 
+			}
+			try {
+				String mem_id = jtf_id.getText();
+				String mem_pw = jtf_pw.getText();
+				String msg = md.login(mem_id, mem_pw);
+				if("비밀번호가 틀립니다.".equals(msg)) {
+					JOptionPane.showMessageDialog(this, "비번을 확인하세요");
+					jtf_pw.setText("");
+					return;
+				}
+				else if("아이디가 존재하지 않습니다.".equals(msg)) {
+					JOptionPane.showMessageDialog(this, "아이디를 확인하세요");
+					jtf_id.setText("");
+					return;
+				}else {
+					JOptionPane.showMessageDialog(this, "로그인 성공","info",JOptionPane.INFORMATION_MESSAGE);
+					this.setVisible(false);
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 		
 	}

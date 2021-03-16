@@ -25,8 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import com.util.DBConnectionMgr;
-/*
- * dispose에 대한 설명임
+/* dispose에 대한 설명임
  * 이 Window, 하위 구성 요소 및 모든 소유 된 하위 구성 요소에서 사용하는 모든 기본 화면 리소스를
  * 해제합니다. 즉, 이러한 구성 요소에 대한 리소스가 파괴되고 사용하는 모든 메모리가 OS로 반환되며
  * 표시 할 수없는 것으로 표시됩니다.
@@ -34,7 +33,7 @@ Window 및 하위 구성 요소는 pack 또는 show에 대한 후속 호출로 �
 다시 표시 가능하게 만들 수 있습니다. 다시 생성 된 Window 및 해당 하위 구성 요소의 상태는 Window가
 삭제 된 시점에서 이러한 개체의 상태와 동일합니다 (해당 작업 간의 추가 수정은 고려하지 않음).
  *
- * setVisiable에 대한 설명임.
+ * setVisiable에 대한 설명
  * 재정의 : 구성 요소의 setVisible (...)
 매개 변수 : b true이면 Window를 표시하고 그렇지 않으면 Window를 숨 깁니다.
 Window 및 / 또는 해당 소유자가 아직 표시 가능하지 않은 경우 둘 다 표시 가능하게됩니다.
@@ -42,7 +41,7 @@ Window 및 / 또는 해당 소유자가 아직 표시 가능하지 않은 경우
 false이면이 Window, 하위 구성 요소 및 모든 소유 자식을 숨 깁니다. Window 및 해당 하위 구성
 요소는 #setVisible (true)를 호출하여 다시 표시 할 수 있습니다.
  */
-public class ZipCodeSearch extends JFrame implements MouseListener
+public class ZipCodeSearchVer2 extends JFrame implements MouseListener
                                                    , ItemListener
                                                    , FocusListener
                                                    , ActionListener {
@@ -73,11 +72,16 @@ public class ZipCodeSearch extends JFrame implements MouseListener
          ,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
    String zdos3[] = null;
    MemberShip memberShip = null;
+   //DB연동에 필요한 선언
+   DBConnectionMgr 		dbMgr = null;
+   Connection			con = null;
+   PreparedStatement 	pstmt = null;
+   ResultSet			rs = null;
    //생성자
-   public ZipCodeSearch() {
+   public ZipCodeSearchVer2() {
       zdos3 = getZdoList();
    }
-   public ZipCodeSearch(MemberShip memberShip) {
+   public ZipCodeSearchVer2(MemberShip memberShip) {
       this();
       this.memberShip = memberShip;
    }
@@ -116,6 +120,45 @@ public class ZipCodeSearch extends JFrame implements MouseListener
       this.setTitle("우편번호 검색");
       this.setSize(430, 400);
       this.setVisible(true);
+   }
+   //콤보박스에 뿌려질 ZDO 컬럼의 정보를 오라클 서버에서 꺼내 오기
+   public String[] getZDOList() {
+	   //조회 결과를 받을 1차 문자 배열 선언. 초기화는 안함. 
+	   String zdos[] = null;
+	   /*
+	    * 오라클 서버에 보낼 select 문 작성하기
+	    * String 자체는 원본이 바뀌지 안흔 ㄴ특성을 가진다.
+	    * StringBuilder는 단일 스레드에 안전하고
+	    * StringBuffer는 다중 스레드에 안전하다. 
+	    */
+	   StringBuilder sb = new StringBuilder();                                             
+           sb.append("SELECT '전체' sigu FROM dual         ");
+           sb.append("UNION ALL                           ");
+           sb.append("SELECT sigu                         ");
+           sb.append("FROM (                              ");
+           sb.append("       SELECT distinct(sigu) sigu   ");
+           sb.append("       FROM zipcode_t               ");
+           sb.append("       WHERE zdo =:pzdo             ");
+           sb.append("       ORDER BY sigu asc            ");
+           sb.append("      )                             ");
+           try {
+			 con = dbMgr.getConnection();
+			 pstmt = con.prepareStatement(sb.toString());
+			 rs = pstmt.executeQuery();
+			 Vector<String> v= new Vector<>();
+			 while(rs.next()){
+				 String zdo = rs.getString("zdo");
+				 v.add(zdo);
+			 }
+			zdos = new String[v.size()];
+			v.copyInto(zdos);
+			v2.copyInto(zdos);
+           } catch (Exception e) {
+			// TODO: handle exception
+           } finally {
+        	   
+           }
+	   return zdos;
    }
    //메인메소드
    public static void main(String[] args) {

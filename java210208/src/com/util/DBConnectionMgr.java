@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+
 public class DBConnectionMgr {
    private final static String _DRIVER = "oracle.jdbc.driver.OracleDriver";
    private final static String _URL    = "jdbc:oracle:thin:@192.168.0.44:1521:orcl11";
@@ -12,7 +13,7 @@ public class DBConnectionMgr {
    private final static String _PW    = "tiger";
    private static DBConnectionMgr dbMgr = null;
    //이른 인스턴스화 eager
-   private static DBConnectionMgr dbMgr2 = new DBConnectionMgr();
+   private static DBConnectionMgr dbMgr2 = new DBConnectionMgr(); //싱글톤
    Connection con = null;
    private DBConnectionMgr() {}
    //게으른 인스턴스화 - 선언과 생성이 따로 쓰여졌을 때
@@ -43,27 +44,36 @@ public class DBConnectionMgr {
    //사용한 자원 반납하기
    //이것을 하지 않으면 오라클 서버에 접속할 때 세션 수의 제한 때문에 오라클서버를 재기동해야 할 수도 있음.
    //SELECT일 때 사용함.
-   public void freeConnection(Connection con, PreparedStatement pstmt, ResultSet rs) {
+   public void freeConnection(Connection con, PreparedStatement pstmt, ResultSet rs) {//freeConnection 연결 반납
       try {
          if(rs !=null) rs.close();
          if(pstmt !=null) pstmt.close();
          if(con !=null) con.close();
       } catch (Exception e) {
-         // TODO: handle exception
+    	   System.out.println("오라클 서버와 연결 실패");
       }
    }
-   //사용한 자원 반납하기
-   //이것을 하지 않으면 오라클 서버에 접속할 때 세션 수의 제한 때문에 오라클서버를 재기동해야 할 수도 있음.
+   
    //INSERT|UPDATE|DELETE
    public void freeConnection(Connection con, PreparedStatement pstmt) {
       try {
-         if(pstmt !=null) pstmt.close();
-         if(con !=null) con.close();
+         if(pstmt!=null) pstmt.close();
+         if(con!=null) con.close();
       } catch (Exception e) {
-         // TODO: handle exception
+    	   System.out.println("오라클 서버와 연결 실패");
+      }
+   }
+ //프로시져 호출 시 사용
+   public void freeConnection(Connection con, CallableStatement cstmt) {
+      try {
+         if(cstmt!=null)cstmt.close();
+         if(con!=null)con.close();
+      }catch(Exception e) {
+         System.out.println("오라클 서버와 연결 실패");
       }
    }
 }
+
 
 
 
