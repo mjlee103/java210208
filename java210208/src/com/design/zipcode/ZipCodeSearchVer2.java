@@ -1,5 +1,7 @@
 package com.design.zipcode;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -73,13 +75,14 @@ public class ZipCodeSearchVer2 extends JFrame implements MouseListener
    String zdos3[] = null;
    MemberShip memberShip = null;
    //DB연동에 필요한 선언
-   DBConnectionMgr 		dbMgr = null;
-   Connection			con = null;
-   PreparedStatement 	pstmt = null;
-   ResultSet			rs = null;
+   DBConnectionMgr 		dbMgr = DBConnectionMgr.getInstance();
+   Connection			con1 = null;
+   PreparedStatement 	pstmt1 = null;
+   ResultSet			rs1 = null;
    //생성자
    public ZipCodeSearchVer2() {
       zdos3 = getZdoList();
+      jcb_zdo = new JComboBox(zdos3);//west
    }
    public ZipCodeSearchVer2(MemberShip memberShip) {
       this();
@@ -87,6 +90,13 @@ public class ZipCodeSearchVer2 extends JFrame implements MouseListener
    }
    //화면처리부
    public void initDisplay() {
+	  this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	   //jth.setBackground(new Color(150,22,50));
+	  jth.setBackground(Color.orange);
+	  jth.setFont(new Font("맑은고딕", Font.BOLD,20));
+	  jtb_zipcode.setGridColor(Color.orange);
+	  jtb_zipcode.getColumnModel().getColumn(0).setPreferredWidth(100);
+	  jtb_zipcode.getColumnModel().getColumn(1).setPreferredWidth(300);
       jtb_zipcode.requestFocus();
       jtb_zipcode.addMouseListener(this);
       jbtn_search.addActionListener(this);
@@ -163,7 +173,7 @@ public class ZipCodeSearchVer2 extends JFrame implements MouseListener
    //메인메소드
    public static void main(String[] args) {
 	  JFrame.setDefaultLookAndFeelDecorated(true);
-      ZipCodeSearch zcs = new ZipCodeSearch();
+      ZipCodeSearchVer2 zcs = new ZipCodeSearchVer2();
       zcs.initDisplay();
    }
    @Override

@@ -1,0 +1,11 @@
+Server Ready.........
+client info:Socket[addr=/127.0.0.1,port=56452,localport=3002]
+100#test
+test님이 입장하였습니다.
+client info:Socket[addr=/127.0.0.1,port=56465,localport=3002]
+100#사과
+사과님이 입장하였습니다.
+client info:Socket[addr=/127.0.0.1,port=56484,localport=3002]
+100#바나나
+바나나님이 입장하였습니다.
+500#사과

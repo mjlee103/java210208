@@ -20,7 +20,7 @@ public class TalkServer extends JFrame implements Runnable{
 	//////////////////[통신에 관련 전변 추가///////////////////..
 	ServerSocket 		server = null;
 	Socket 				client = null;
-	TalkServerThread			tst 		= null;
+	TalkServerThread			tst 		= null; 
 	Vector<TalkServerThread>	globalList 	= null;   // **********vector가 핵심 키워드. 
 	JTextArea 	jta_log = new JTextArea();
 	JScrollPane jsp_log = new JScrollPane(jta_log);
