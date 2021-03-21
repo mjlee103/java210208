@@ -32,6 +32,10 @@ public class TalkServerThread extends Thread {
 			// TODO: handle exception
 		}
 	}
+
+	public TalkServerThread(athread.talk2.TalkServer talkServer) {
+		// TODO Auto-generated constructor stub
+	}
 	//현재 입장해 있는 친구들 모두에게 메시지 전송하기 구현
 	public void broadCasting(String msg) { //glabalList에는 서버에 접속해온 클라이언트에 대한 스레드 객체 담김. 
 		for(TalkServerThread tst:ts.globalList) {
