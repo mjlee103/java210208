@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis.mapper.ZipcodeMapper">
+	<select id="getZDOList" parameterType="java.util.Map" resultType="java.util.Map">                                           
+          SELECT '전체' zdo FROM dual        
+          UNION ALL                           
+          SELECT zdo                         
+          FROM (                              
+                 SELECT distinct(zdo) zdo  
+                 FROM zipcode_t                          
+                 ORDER BY zdo asc            
+                )                             
+	</select>
+		SELECT address, zipcode
+		  FROM zipcode_t
+		 WHERE 1=1
+		if(zdo!=null && zdo.length()>0) {
+			 AND zdo=?
+		}
+		if(dong!=null && dong.length()>0) {
+			AND dong LIKE '%'||?||'%'
+		}
+	<select id="refreshDta" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT address, zipcode
+		 From zipcode_t
+		 WHERE 1=1
+		 <if test="zdo !=null and zdo.length()>0">
+		 	AND zdo = #{zdo}
+		 </if>
+		 <if test="dong !=null and dong.length()>0"">
+		 	AND dong LIKE '%'||#{dong}||'%'
+		</if>
+	</select>
+		}
+	<select id="refreshDta2" parameterType="java.util.Map" resultType="com.vo.ZipCodeVo">
+		SELECT address, zipcode
+		 From zipcode_t
+		 WHERE 1=1
+		 <if test="zdo !=null and zdo.length()>0">
+		 	AND zdo = #{zdo}
+		 </if>
+		 <if test="dong !=null and dong.length()>0"">
+		 	AND dong LIKE '%'||#{dong}||'%'
+		</if>
+	</select>
+<mapper/>
