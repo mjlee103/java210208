@@ -75,4 +75,12 @@ public class ZipCodeVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public void setChkBox(Boolean chkBox) {
+		// TODO Auto-generated method stub
+		
+	}
+	public Object getChkBox() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }   

@@ -20,15 +20,18 @@ public class BookDao {
 			//insert here
 			Reader reader = Resources.getResourceAsReader(resource);
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			session = sqlMapper.openSession();
+			String currentTime = session.selectOne("currentTime"); //(id 자리)
+			System.out.println("currentTime =>"+currentTime);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return bookList;
 	}
 	public static void main(String[] args) { //static이어서 내 자신이지만 인스턴스화 해야 함.
 		BookDao bDao = new BookDao();
 		bDao.getBookList();
-		List<Map<String,Object>> bookList = null;
+		List<Map<String, Object>> bookList = null;
 		bookList = bDao.getBookList();
 		System.out.println(bookList);
 	}
