@@ -3,6 +3,9 @@ package athread.talk2;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+
 /*****************************************
  * 이벤트 핸들러의 역할은 말하기이고,
  * 클라이언트측의 스레드의 역할은 듣기이다. 
@@ -10,8 +13,8 @@ import java.util.Vector;
  *****************************************/
 public class TomatoClientThread extends Thread {
 	TomatoClient tc = null;
-	public TomatoClientThread(TomatoClient tc) {
-		this.tc = tc;
+	public TomatoClientThread(TomatoClientVer2 tomatoClientVer2) {
+		this.tc = tomatoClientVer2;
 	}
 	@Override
 	public void run() {
@@ -27,9 +30,15 @@ public class TomatoClientThread extends Thread {
 					protocol = Integer.parseInt(st.nextToken());//100
 				}
 				switch(protocol) {
-					case 100:{//100#apple
+					case Protocol.ROOM_IN:{//100#apple
 						String nickName = st.nextToken();
-						tc.jta_display.append(nickName+"님이 입장하였습니다.\n");
+						//tc.jta_display.append(nickName+"님이 입장하였습니다.\n");
+						MutableAttributeSet attr = new SimpleAttributeSet();
+						try {
+							tc.sd_display.insertString(tc.sd_display.getLength(), nickName+"님이 입장하였습니다./n", attr)
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 						Vector<String> v = new Vector<>();
 						v.add(nickName);
 						tc.dtm.addRow(v);

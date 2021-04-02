@@ -48,10 +48,10 @@ public class TomatoServer extends JFrame implements Runnable{
 				server = new ServerSocket(3002);
 				jta_log.append("Server Ready.........\n");
 				while(!isStop) {
-					socket = server.accept();
-					jta_log.append("client info:"+socket+"\n");				
-					tst = new TomatoServerThread(this);
-					tst.start();
+					socket = server.accept();//대기타는 중 
+					jta_log.append("client info:"+socket+"\n");	//입장되면 client에 소켓 정보 뿌려줌. 			
+					tst = new TomatoServerThread(this); //tomato server thread 생성 
+					tst.start();//run 호출 
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

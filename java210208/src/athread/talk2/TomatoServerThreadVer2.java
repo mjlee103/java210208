@@ -5,14 +5,14 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-public class TomatoServerThread extends Thread {
+public class TomatoServerThreadVer2 extends Thread {
 	TomatoServer ts = null;;
 	Socket client = null;
 	ObjectOutputStream oos = null;
 	ObjectInputStream ois = null;
 	String chatName = null;//현재 서버에 입장한 클라이언트 스레드 닉네임 저장
 	
-	public TomatoServerThread(TomatoServer ts) {
+	public TomatoServerThreadVer2(TomatoServer ts) {
 		this.ts = ts;
 		
 		this.client = ts.socket;
@@ -26,7 +26,7 @@ public class TomatoServerThread extends Thread {
 			st.nextToken();//130
 			chatName = st.nextToken();//은영
 			ts.jta_log.append(chatName+"님이 입장하였습니다.\n");
-			for(TomatoServerThread tst:ts.globalList) {
+			for(TomatoServerThreadVer2 tst:ts.globalList) {
 			//이전에 입장해 있는 친구들 정보 받아내기
 				//String currentName = tst.chatName;
 				this.send(Protocol.ROOM_IN+"#"+tst.chatName);//기다리면 방에 입장하게 됨. 
@@ -42,7 +42,7 @@ public class TomatoServerThread extends Thread {
 
 	//현재 입장해 있는 친구들 모두에게 메시지 전송하기 구현
 		public void broadCasting(String msg) {
-			for(TomatoServerThread tst:ts.globalList) {//globalList.size() =1, 희태가 들어오면 2로 바뀜 
+			for(TomatoServerThreadVer2 tst:ts.globalList) {//globalList.size() =1, 희태가 들어오면 2로 바뀜 
 				tst.send(msg);//은영, 히ㅡ태가 들어오면 은영, 희태가 같이 돈다. 
 			}
 		}
@@ -72,16 +72,22 @@ public class TomatoServerThread extends Thread {
 						protocol = Integer.parseInt(st.nextToken());//100
 					}
 					switch(protocol) {
-						case 200:{
+						case Protocol.MESSAGE:{
 							
 						}break;
-						case 201:{
+						case Protocol.CHANGE:{//300#하하#하늘소
+							String nickName = st.nextToken();
+							String afterName = st.nextToken();
+							String msg1 = st.nextToken();
+							this.chatName = afterName; //서버측 이름과 동기화 **주의할 것. 
+							broadCasting(Protocol.CHANGE
+									+Protocol.seperator+nickName
+									+Protocol.seperator+afterName
+									+Protocol.seperator+msg1
+									); 
 							
 						}break;
-						case 202:{
-							
-						}break;
-						case 500:{
+						case Protocol.ROOM_OUT:{
 							String nickName = st.nextToken();
 							ts.globalList.remove(this);
 							broadCasting(500
