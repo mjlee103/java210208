@@ -64,15 +64,21 @@ public class TomatoClientThreadVer2 extends Thread{
             		   //기존 대화명 가져오기
             		   String currentName = (String)tc.dtm.getValueAt(i, 0);
             		   if(currentName.equals(nickName)) {
+            			   //테이블의 DefaultTableModel을 갱시너리 하는 것. 
             			   tc.dtm.setValueAt(afterName, i, 0);
             			   break;
             		   }
             		   try {
-						tc.sd_display.insertString(tc.sd_display.getLength(), msg+".", null);
+						tc.sd_display.insertString(tc.sd_display.getLength(), msg1+".", null);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-            		   tc.jtp_display.setCaretPosition(tc.sd_display.getLength(), msg1+"/n");//자동으로 커서 잡아 주는 것 
+            		   tc.jtp_display.setCaretPosition(tc.sd_display.getLength());
+            		   if(nickName.equals(tc.nickName()){//자동으로 커서 잡아 주는 것 '
+            			   tc.setTitle(afterName+"님의 대화창");
+            			  tc.nickName = afterName; //동기화 하는 것이 중요함. 
+            		   }
+            			   
             	   }
                }break;
                case Protocol.ROOM_OUT:{
