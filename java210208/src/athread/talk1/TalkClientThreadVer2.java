@@ -2,13 +2,13 @@ package athread.talk1;
 
 import java.util.StringTokenizer;
 
-public class TalkClientThread extends Thread {
+public class TalkClientThreadVer2 extends Thread {
 	TalkClient tc = null;
-	
-	public TalkClientThread(TalkClient talkClient) {
-		// TODO Auto-generated constructor stub
-	}
 
+	//public TalkClientThread(TalkClientVer2 talkClientVer2) {
+	//	this.tc = talkClientVer2;//조립이다. 연결 - 파라미터로 넘어온 원본을 전역변수에 초기화 
+	//}
+	
 	@Override
 	public void run() { //actionperformed는 말하기 run은 듣기 
 		 System.out.println("run 호출 성공");
