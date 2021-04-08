@@ -332,9 +332,18 @@ public class AddressBook extends JFrame {
 	// 삭제 메뉴나 삭제 아이콘 선택시 작업을 정의합니다.
 	private void deleteActionPerformed() {
 		int index[] = table.getSelectedRows();
+		AddressVO pVO = new AddressVO();
 		for(int i =0;i<myTableModel.getRowCount();i++) {
 			if(table.isRowSelected(i)) {
-				Integer id = Integer.parseInt(myTableModel.getValueAt(i, 0));//선택한 로우에 대한 식별자				
+				Integer id = Integer.parseInt((String)myTableModel.getValueAt(i, 0));//선택한 로우에 대한 식별자		
+				pVO.setId(id);
+				pVO.setCommand("delete");
+				ctrl = new AddressCtrl();
+				try {
+					ctrl.send(pVO);				
+				} catch (Exception e) {
+					logger.info("Exception:"+e.toString());
+				}
 			}
 		}
 
