@@ -67,7 +67,7 @@ public class DeptList extends JFrame implements ActionListener{
 	//화면쳐리부
 	public void initDisplay() {
 		jbtn_search.addActionListener(this);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);//종료 누를때 자동 창 사라짐
 		tableCreate();//메소드 호출도 동기화가 필요하다.- 시점문제
 		this.setTitle("부서목록");
 		this.add("North",jbtn_search);
