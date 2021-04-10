@@ -2,8 +2,8 @@
 <!DOCTYPE configuration
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-<properties resource="mybatis210409/db.properties"/>
+<configuration> 
+<properties resource="prac/db.properties"/>
    <environments default="development">
       <environment id="development">
          <transactionManager type="JDBC" />
@@ -15,7 +15,7 @@
          </dataSource>
       </environment>
    </environments>
-   <mappers><!-- mapper -->
-      <mapper resource="mybatis210409/mapperproduct.xml" />
+   <mappers>
+      <mapper resource="prac.semi/Msgr_Mem_Map.xml" /> 
    </mappers>
 </configuration>

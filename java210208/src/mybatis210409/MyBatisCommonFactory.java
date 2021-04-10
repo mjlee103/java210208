@@ -17,8 +17,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 	//예제 만들어서 저장하기. 
 	public static SqlSessionFactory getInstance() {
 		if(sqlSessionFactory ==null) {
+		//synchronized는 if문 안쪽에 위치하는 것이 더 안전하다. 
 			synchronized(SqlSessionFactory.class) {
-				if(sqlSessionFactory ==null) {
+				if(sqlSessionFactory == null) {
 					try {
 						String resource = "mybatis210409/Ma_product.xml";
 						Reader reader = Resources.getResourceAsReader(resource);

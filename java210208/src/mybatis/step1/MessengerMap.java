@@ -16,7 +16,7 @@ public class MessengerMap {
 		map.put("password", "");
 		map.put("nickname", "");
 		/*
-		 * 모든 테이블의 컬럼 미리 put 해놓기
+		 * 모든 테이블의 컬럼명을 미리 put 해놓기
 		 * 
 		 * 
 		 */
