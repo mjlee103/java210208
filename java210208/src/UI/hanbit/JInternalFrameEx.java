@@ -68,7 +68,6 @@ public class JInternalFrameEx extends JFrame implements ActionListener {
 			frame.setSize(200,200);
 		else
 			frame.setBounds((cnt-1)*20, (cnt-1)*20, 200, 200);
-		ㅓ
 		cnt++;
 
 		desktop.add(frame);
