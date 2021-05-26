@@ -10,11 +10,16 @@ public class InsaMain {
 				new ClassPathXmlApplicationContext
 									("di\\step1\\insaBean.xml");
 		InsaList insaList = (InsaList)context2.getBean("insa");
+		InsaMap insaMap = (InsaMap)context2.getBean("insaMap");
 		System.out.println(insaList);
 		System.out.println(insaList.insaBean);
-		for(String s:insaList.insaBean){
-			System.out.println(s);
-	}
-	
+		System.out.println(insaMap);
+		System.out.println(insaMap.mapBean);
+//		for(String s:insaList.insaBean){
+//			System.out.println(s);
+//	}
+//		InsaList insaList2 = new InsaList();
+//		System.out.println(insaList);
+//		System.out.println(insaList2.insaBean);
 	}
 }

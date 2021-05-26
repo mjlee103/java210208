@@ -1,5 +1,6 @@
 package sungjuk.step1;
 
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -117,7 +118,7 @@ public class SungJukAppUIme extends JFrame implements ActionListener {
 	//메인메소드
 	public static void main(String[] args) {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		SungJukAppUI sja = new SungJukAppUI();
+		SungJukAppUIme sja = new SungJukAppUIme();
 		sja.initDisplay();
 	}
 	@Override

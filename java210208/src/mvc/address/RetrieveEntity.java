@@ -62,7 +62,9 @@ public class RetrieveEntity {
 				 v.add(aVO);
 				aVOS = new AddressVO[v.size()];
 				v.copyInto(aVOS);
-		} catch (SQLException se) {
+			 }
+	    }
+		 catch (SQLException se) {
 			
 		}
 	    finally {//사용한 자원 반납하기. 

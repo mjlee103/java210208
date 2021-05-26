@@ -13,5 +13,8 @@
 	<classpathentry kind="lib" path="C:/workspace_java80/spring-context-4.3.30.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_java80/spring-core-4.3.30.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/workspace_java80/spring-expression-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/workspace_java80/spring-webmvc-4.3.30.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 9.0/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 9.0/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

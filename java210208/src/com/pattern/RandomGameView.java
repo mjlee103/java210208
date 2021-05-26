@@ -49,7 +49,7 @@ public class RandomGameView extends JFrame implements ActionListener
 		for(int i=0;i<jbtns.length;i++) {
 			jbtn = new JButton(nums_label[i]);
 			jp_south.add(jbtn);
-			jbtns[i];
+			nums_label[i];
 			jbtn.addActionListener(this);
 		}
 		jp_east.setBackground(Color.blue);

@@ -2,8 +2,8 @@ package book.ch4;
 
 public class FuzzBuzzGame {
 	public static void start() {
-		for(int i=1,i<=100; i++) {
-			switch(i%35) {
+		for(int i=1; i<=100; i++) {
+			switch(i=35) {
 			case 0:
 				System.out.println("fizzbuzz");
 				break;

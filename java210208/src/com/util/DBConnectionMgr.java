@@ -9,7 +9,7 @@ import java.sql.CallableStatement;
 
 public class DBConnectionMgr {
    private final static String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-   private final static String _URL    = "jdbc:oracle:thin:@192.168.0.44:1521:orcl11";
+   private final static String _URL    = "jdbc:oracle:thin:@localhost:1521:orcl11";
    private final static String _USER    = "apple";
    private final static String _PW    = "tiger";
    private static DBConnectionMgr dbMgr = null;

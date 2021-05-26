@@ -21,7 +21,7 @@ public class ProductView{
 	JMenuItem jmi_del      = new JMenuItem("삭제");
 	
 	//테이블 그리기
-	String cols[] = {"제품번호","제품이름","단가","제조업체"};d
+	String cols[] = {"제품번호","제품이름","단가","제조업체"};
 	String data[][] = new String[0][4];
 	DefaultTableModel    dtm_dept = new DefaultTableModel(data,cols);
 	JTable             	 jtb_dept = new JTable(dtm_dept);

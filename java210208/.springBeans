@@ -9,7 +9,7 @@
 	<configs>
 		<config>src/di/step1/HelloBean.xml</config>
 		<config>src/di/step1/sonataBean.xml</config>
-		<config>src/di/step1/insaBean.xml</config>
+		<config>src/di/step1/InsaBean.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
