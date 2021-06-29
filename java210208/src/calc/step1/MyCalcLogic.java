@@ -3,8 +3,7 @@ package calc.step1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
+import com.onj.MyCalcView;
 
 public class MyCalcLogic implements ActionListener{
 

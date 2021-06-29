@@ -15,7 +15,7 @@ public class QuizArray0219 {
 		for(i = 1; i<size ; i++) {
 			
 		}
-		return max;
+		return i;
 			}
 	// 최대값 구하기
 	void printArray(int size) {
