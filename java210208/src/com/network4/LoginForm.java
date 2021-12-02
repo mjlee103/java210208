@@ -26,7 +26,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import com.jdbc.DBConnectionMgr2;
+import common.jdbc.DBConnectionMgr;
 
 
 public class LoginForm extends JFrame implements ActionListener {
